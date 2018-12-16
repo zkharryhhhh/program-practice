@@ -1,0 +1,32 @@
+//此类排版题有一个显著的特点：首先图形具有较强的规律性，
+                          且该规律顺序往往与输出顺序一致
+#include<stdio.h>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+
+
+int main() {
+	int h;
+	cin >> h;
+	int firstline = true;
+	for (int i = 0; i < h; i++) {
+		if(firstline==false)
+			cout << endl;
+		firstline = false;
+		for (int j = 2* h - 2 - 2 * i; j > 0; j = j--) {
+			cout << " ";
+		}
+		for (int j = 0; j < h + 2 * i; j++) {
+			cout << "*";
+		}
+		
+	}
+	
+
+	getchar();
+	getchar();
+	return 0;
+}

@@ -1,0 +1,127 @@
+//超时
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+
+struct worker {
+	int a;
+	char b[10];
+	int c;
+};
+
+static bool compare(worker w1, worker w2) {
+	if (w1.c > w2.c) {
+		return false;
+	} 
+	if (w1.c == w2.c) {
+		if (w1.a > w2.a) {
+			return false;
+		}
+		if (w1.a == w2.a) {
+			return (w1.b < w2.b);
+		}
+	}
+}
+int main()
+{
+	int N;
+	cin >> N;
+	struct worker w[30];
+	for (int i = 0; i < N; i++) {
+		cin >> w[i].a >> w[i].b >> w[i].c;
+	}
+
+	for (int i = 0; i < N - 1; i++) {
+		for (int j = 0; j < N - 1 - i; j++) {
+			if (w[j].c > w[j + 1].c) {
+				worker t;
+				t = w[j + 1];
+				w[j + 1] = w[j];
+				w[j] = t;
+				continue;
+			}
+			if (w[j].c == w[j + 1].c) {
+				if (w[j].a > w[j + 1].a) {
+					worker t;
+					t = w[j + 1];
+					w[j + 1] = w[j];
+					w[j] = t;
+					continue;
+				}
+				if (w[j].a == w[j + 1].a) {
+					if (w[j].b > w[j + 1].b) {
+						worker t;
+						t = w[j + 1];
+						w[j + 1] = w[j];
+						w[j] = t;
+						continue;
+					}
+				}
+			}
+		}
+	}
+	for (int i = 0; i < 3; i++) {
+		cout << w[i].a << ' ' << w[i].b << ' ' << w[i].c << endl;
+	}
+	getchar();
+	getchar();
+	return 0;
+}
+
+
+//高票答案
+//要注意vector类型的某个数不能用数组的形式表示，而应该用vector.begin(),vector.end().
+#include<iostream>
+#include<vector>
+#include<string>
+#include<algorithm>
+using namespace std;
+ 
+typedef struct Name{
+    int age;
+    int ID;
+    string name;
+}Name;
+ 
+static bool comp(Name a,Name b)
+{
+    if(a.age<b.age)
+        return true;
+    else if(a.age==b.age)
+    {
+        if(a.ID<b.ID)
+            return true;
+        else if(a.ID==b.ID)
+        {
+            if(a.name<b.name)
+                return true;
+        }
+    }
+    return false;
+}
+ 
+int main()
+{
+    int N;
+    while(cin>>N)
+    {
+        vector<Name> vec;
+        Name temp;
+        for(int i=0;i<N;i++)
+        {
+            cin>>temp.ID>>temp.name>>temp.age;
+            vec.push_back(temp);
+        }
+         
+        sort(vec.begin(),vec.end(),comp);
+         
+        for(int i=0;i<3;i++)
+        {
+            cout<<vec[i].ID<<" "<<vec[i].name<<" "<<vec[i].age<<endl;
+        }
+    }
+    return 0;
+}
+

@@ -1,0 +1,19 @@
+//注意while（cin>>n）的使用，以及格式化输出oct
+
+include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+using namespace std;
+
+
+int main()
+{
+	int n;
+	while (cin >> n) {
+		cout << oct << n << endl;
+	}
+	getchar();
+	getchar();
+	return 0;
+}

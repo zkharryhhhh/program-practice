@@ -1,0 +1,54 @@
+//一个需要注意的点，sort函数中的n必须是int型
+
+
+#include<stdio.h>
+
+#include<algorithm>
+using namespace std;
+
+struct A {
+	double J;
+	double f;
+	double v;
+
+};
+
+bool cmp(A a1, A a2) {
+	return a1.v > a2.v;
+}
+
+int main() {
+
+	double m;
+	int n;
+	while (scanf_s("%lf %d", &m, &n) != EOF) {
+		if (m == -1 && n == -1) {
+			break;
+		}
+		A a[1001];
+		double c = 0;
+		for (int i = 0; i < n; i++) {
+			scanf_s("%lf", &a[i].J);
+			scanf_s("%lf", &a[i].f);
+			a[i].v = a[i].J / a[i].f;
+		}
+		sort(a, a + n, cmp);
+		for (int j = 0; j < n; j++) {
+			if (m == 0) {
+				break;
+			}
+			if (m > a[j].f) {
+				c += a[j].J;
+				m -= a[j].f;
+			}
+			else {
+				c += a[j].J*m / a[j].f;
+				m = 0;
+			}
+		}
+		printf("%.3lf", c);
+	}
+	getchar();
+	getchar();
+	return 0;
+}

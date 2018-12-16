@@ -1,0 +1,106 @@
+//我的方法，vs测评正确，但在线测评会提示，输出格式有误
+//注意所有程序的处理过程均放到while(cin>>a)的里面进行，否则需要手动输入ctrl+z，来退出输入
+//暴力搜索，先找出字符串中按顺序重复出现过的字符，存放在指定数组中，将字符串与该数组进行对比，找出重复出现的字符的位置
+//注意对逗号的处理
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+using namespace std;
+int main()
+{
+	char a[101];
+	int n = 0;
+	while (cin >> a) {
+		n = strlen(a);
+		//b数组按顺序存放字符串中重复出现过的元素
+		char b[101];
+		int b_size = 0;
+		for (int i = 0; i < n; i++) {
+			for (int j = i + 1; j < n; j++) {
+				if (a[i] == a[j]) {
+					if (b_size == 0) {
+						b[0] = a[i];
+						b_size++;
+					}
+					else {
+						for (int k = 0; k < b_size; k++) {
+							if (a[i] == b[k]) {
+								break;
+							}
+							if (k == b_size - 1) {
+								b_size++;
+								b[b_size - 1] = a[i];
+							}
+						}
+					}
+				}
+			}
+		}
+
+		for (int k = 0; k <= b_size; k++) {
+			int first = 0;//标记其是否为第一条输出，以决定是否输出逗号
+			int second = 0;
+			for (int i = 0; i < n; i++) {
+
+				//注意此处顺序，十分关键
+				if (b[k] == a[i] && first != 0) {
+					cout << ',' << b[k] << ':' << i;
+
+				}
+				if (b[k] == a[i] && first == 0) {
+					cout << b[k] << ':' << i;
+					first++;
+				}
+			}
+			cout << endl;
+		}
+
+		getchar();
+		getchar();
+		getchar();
+		return 0;
+	}
+}
+
+
+//高票答案
+#include <iostream>
+#include <string>
+ 
+using namespace std;
+ 
+ 
+int main()
+{
+   string s;
+   while(cin>>s)
+   {
+     //两层循环，直接判断进行输出，省去了放到b数组的过程。
+     for(int i=0;i<s.size()-1;++i)
+     {
+         bool first=false;
+         if(s[i]=='*')
+             continue;
+         for(int j=i+1;j<s.size();++j)
+         {                       
+              if(s[i]==s[j])
+              {
+                 if(!first)
+                 {
+                     cout<<s[i]<<":"<<i;
+                     first=true;
+                 } 
+                 cout<<","<<s[j]<<":"<<j;
+                 s[j]='*';  
+              }           
+         }
+         if(first)
+         {
+           cout<<endl; 
+         }
+     }
+      
+   }
+}

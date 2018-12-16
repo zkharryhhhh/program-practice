@@ -1,0 +1,3 @@
+getline可以接收整行字符串
+
+getline(cin,str,'#') cin是输入，不要变，str是输入的字符串名，string型，最后一个参数是结束字符，可不写。

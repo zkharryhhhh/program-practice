@@ -1,0 +1,82 @@
+//问题的关键在于找到规律，发现1和2的数量之间存在联系
+//对应关系 n为奇数时： 2: 0~(n-1)/2
+//                     1: n~1
+//         n为偶数时： 2: 0~n/2
+//                     1: n~0  
+// 根据排列组合的思想（应用了组合函数），将每种对应关系的方式都找出来，求和即可 
+                      
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+int zuhe(int n, int m) {
+	if (m == 0) {
+		return 1;
+	}
+	int up = 1;
+	int down = 1;
+	int t = m;
+	for (int i = 0; i < t;i++) {
+		up = up*n;
+		n--;
+	}
+	for (int i = 0; i < t; i++) {
+		down = down*m;
+		m--;
+	}
+	return up / down;
+}
+int main() {
+	int n;
+	while (cin >> n) {
+		int sum = 0;
+		
+		if (n % 2 == 0) {
+		    int t = n / 2;
+			for (int i = 0; i <= t; i++) {
+				sum += zuhe(n, i);
+				n--;
+			}
+		}
+		else {
+			int t = (n - 1) / 2;
+			for (int i = 0; i <=t ; i++) {
+				sum += zuhe(n, i);
+				n--;
+			}
+		}
+		cout << sum;
+	}
+	
+	getchar();
+	getchar();
+	getchar();
+	return 0;
+	
+}
+
+
+//高票答案
+//还是这种思想比较巧妙，可以应对更多种走法的解，例如走三步，走四步等
+//走到第n阶时可能是从第n-1阶走一步到的，也可能是从n-2阶走两阶到的，设F(n)为走到n阶的种数，则F(n)=F(n-1)+F(n-2).
+//这是一个动态规划的问题，其实就是一个斐波那契数列。
+#include<iostream>
+#include<stack>
+using namespace std;
+
+int main(){
+    long a[90];
+    int N;
+    while(cin>>N){
+        a[1]=1;a[2]=2;
+        for(int i=3;i<=N;i++){
+            a[i]=a[i-1]+a[i-2];
+        }
+        cout<<a[N]<<endl;
+    }
+    return 0;
+}

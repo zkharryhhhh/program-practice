@@ -1,0 +1,21 @@
+//注意理解题目，是每行，所以加个while循环即可
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+	int main() {
+		int a, b;
+		while (cin >> a >> b) {
+			cout << a + b << endl;
+		}
+	
+	getchar();
+	getchar();
+	getchar();
+	return 0;
+	
+}

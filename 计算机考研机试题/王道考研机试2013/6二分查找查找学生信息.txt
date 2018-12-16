@@ -1,0 +1,68 @@
+//几个关键点，该题将学号排序并不是按照从大到小的顺序进行的，而是字符串大小排序，这点值得我学习，大大减少排序的复杂度
+//注意字符串中strlen strcmp等的应用，非常关键
+//二分查找，注意top base mid 即可
+#include<iostream>
+#include<stdio.h>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+
+struct student
+{
+	char no[5];
+	char name[10];
+	int age;
+	char sex[5];
+	
+};
+
+bool cmp(student a, student b) {
+	return strcmp(a.no, b.no) < 0;
+}
+
+int main() {
+	
+	int n;
+	int m;
+	student s[1000];
+	char a[10000][5];
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> s[i].no >> s[i].name >> s[i].sex >> s[i].age;
+	}
+	sort(s, s + n,cmp);
+	int t;
+	cin >> t;
+	while (t-- != 0) {
+		int ans = -1;
+		char x[30];
+		cin >> x;
+		int top = n - 1, base = 0;
+		while (top >= base) {
+			int mid = (top + base) / 2;
+			int tmp = strcmp(s[mid].no, x);
+			if (tmp == 0) {
+				ans = mid;
+				break;
+			}
+			else if (tmp > 0) {
+				top = mid - 1;
+			}
+			else {
+				base = mid + 1;
+			}
+		}
+		if (ans == -1) {
+			cout << "No Answer" << endl;
+		}
+		else {
+			cout << s[ans].no << s[ans].name << s[ans].sex << s[ans].age;
+		}
+	}
+	
+	getchar();
+	getchar();
+	return 0;
+}

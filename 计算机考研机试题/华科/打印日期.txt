@@ -1,0 +1,19 @@
+//很无聊的题，怎么暴力都能做出来，但是按高票这种把月份对应的天数放到数组方便一些
+/*其实只要建立两个数组分别存放闰年和非闰年的各个月份对应天数就可以了*/
+#include<stdio.h>
+int a[13]={0,31,28,31,30,31,30,31,31,30,31,30,31},
+b[13]={0,31,29,31,30,31,30,31,31,30,31,30,31};
+int main(void){
+ int year,day,month;
+ while(scanf("%d%d",&year,&day)!=EOF){
+  month=0;
+  if(year%4==0&&year%100!=0||year%400==0)
+     {while(day>b[month])day-=b[month],month++;
+  printf("%04d-%02d-%02d\n",year,month,day);
+ }
+  else
+      {while(day>a[month])day-=a[month],month++;
+  printf("%04d-%02d-%02d\n",year,month,day);
+ }
+ }return 0;
+}

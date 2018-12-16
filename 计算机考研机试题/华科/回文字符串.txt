@@ -1,0 +1,37 @@
+//此处留个疑问，如何控制台输入未知行数的数据
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+using namespace std;
+//很简单，找到中间值，使用flag作为标识符说明是否每对对应字符都是相等的
+int main()
+{
+
+
+	char s[1000];
+	while (cin >> s)
+	{
+		int len = strlen(s);
+		int i, flag = 0;
+		for (i = 0; i <= (len / 2 - 1); i++)
+		{
+			if (s[i] != s[len - 1 - i])
+			{
+				cout << "No!" << endl;
+				flag = 1;
+				break;
+			}
+		}
+
+				if (flag == 0)
+			cout << "Yes!" << endl;
+	}
+	getchar();
+	getchar();
+	getchar();
+	return 0;
+	
+}

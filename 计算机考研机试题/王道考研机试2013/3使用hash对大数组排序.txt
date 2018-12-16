@@ -1,0 +1,35 @@
+//注意，刚开始时stack overflow,手动在项目，属性，连接器，将堆栈保留大小变大。
+#include<stdio.h>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+
+
+int main() {
+	int n;
+	int m;
+	
+	int hash[1000001] = {0};
+	cin >> n >> m;
+	for (int i = 0;i < n; i++) {
+		int x;
+		cin >> x;
+		hash[x + 500000] = 1;
+	}
+	for (int j = 1000000; j >= 0; j--) {
+		if (hash[j] == 1) {
+			cout << j - 500000<<" ";
+			m--;
+			if(m==0){
+				break;
+			}
+		}
+	}
+
+	
+	getchar();
+	getchar();
+	return 0;
+}

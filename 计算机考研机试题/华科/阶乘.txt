@@ -1,0 +1,64 @@
+//我的方法，首先找出要用到的最大偶数以及最大奇数，然后外层构建阶乘函数。
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<cstring>
+#include<iostream>
+using namespace std;
+
+int jiecheng(int x) {
+	int t = 1;
+	while (x > 0) {
+		t = t*x;
+		x--;
+	}
+	return t;
+}
+int main()
+{
+	//n是最大偶数，m是最大奇数
+	int n;
+	cin >> n;
+	int m = n;
+	if (n % 2 == 0) {
+		m = n-1;
+	}
+	else {
+		n = n - 1;
+	}
+
+	int sum_m = 0;
+	int sum_n = 0;
+	
+	for (int i = 1; i <= m; i = i + 2) {
+		sum_m = sum_m + jiecheng(i);
+	}
+	int t = 1;
+	for (int i = 2; i <= n; i = i + 2) {
+		sum_n = sum_n + jiecheng(i);
+	}
+	cout << sum_m <<' '<< sum_n << endl;
+	getchar();
+	getchar();
+	return 0;
+}
+
+
+//高票答案，核心思想一致，但写法简单许多
+#include <iostream>
+using namespace std;
+int main()
+{
+    int n ,ans1, ans2, i, j;
+    while (cin >> n) {
+        ans1 = ans2 = 0, j = 1;
+        for (i = 1; i <= n; ++i) {
+            j *= i;
+            if (i % 2) ans1 += j;
+            else ans2 += j;
+        }
+        cout << ans1 << " " << ans2 << endl;
+    }
+}
+
+

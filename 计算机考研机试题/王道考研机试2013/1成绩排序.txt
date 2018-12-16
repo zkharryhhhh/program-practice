@@ -1,0 +1,38 @@
+//注意两点，一是算符重载，二是sort函数的参数
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+#include<cmath>
+using namespace std;
+
+struct student {
+    char name[101];
+	int age;
+	int grade;
+	bool operator < (const student &s) {
+		if (grade != s.grade)
+			return grade < s.grade;
+		int tmp = strcmp(name, s.name);
+		if (tmp != 0)
+			return tmp < 0;
+		else
+			return age < s.age;
+	}
+};
+int main() {
+	int n;
+	student s[1001];
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> s[i].name >> s[i].age >> s[i].grade;
+	}
+	sort(s, s+n);
+	for (int i = 0; i < n; i++) {
+		cout << s[i].name <<' '<< s[i].age<<' ' << s[i].grade<<endl;
+	}
+
+	getchar();
+	getchar();
+	return 0;
+}
